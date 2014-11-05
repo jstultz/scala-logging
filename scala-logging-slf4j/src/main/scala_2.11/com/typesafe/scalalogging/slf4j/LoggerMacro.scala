@@ -20,6 +20,8 @@ package slf4j
 import scala.annotation.switch
 import scala.reflect.macros.blackbox.Context
 
+import org.slf4j.Marker
+
 private object LoggerMacro {
 
   type LoggerContext = Context { type PrefixType = Logger }
@@ -48,6 +50,18 @@ private object LoggerMacro {
     }
   }
 
+  def errorMessageMarker(c: LoggerContext)(marker: c.Expr[Marker], message: c.Expr[String]) = {
+    import c.universe._
+    val underlying = q"${c.prefix}.underlying"
+    q"if ($underlying.isErrorEnabled) $underlying.error($marker, $message)"
+  }
+
+  def errorMessageCauseMarker(c: LoggerContext)(marker: c.Expr[Marker], message: c.Expr[String], cause: c.Expr[Throwable]) = {
+    import c.universe._
+    val underlying = q"${c.prefix}.underlying"
+    q"if ($underlying.isErrorEnabled) $underlying.error($marker, $message, $cause)"
+  }
+
   // Warn
 
   def warnMessage(c: LoggerContext)(message: c.Expr[String]) = {
@@ -70,6 +84,18 @@ private object LoggerMacro {
       case 2 => q"if ($underlying.isWarnEnabled) com.typesafe.scalalogging.slf4j.LoggerSupport.warn($underlying, $message, ${args(0)}, ${args(1)})"
       case _ => q"if ($underlying.isWarnEnabled) $underlying.warn($message, ..$args)"
     }
+  }
+
+  def warnMessageMarker(c: LoggerContext)(marker: c.Expr[Marker], message: c.Expr[String]) = {
+    import c.universe._
+    val underlying = q"${c.prefix}.underlying"
+    q"if ($underlying.isWarnEnabled) $underlying.warn($marker, $message)"
+  }
+
+  def warnMessageCauseMarker(c: LoggerContext)(marker: c.Expr[Marker], message: c.Expr[String], cause: c.Expr[Throwable]) = {
+    import c.universe._
+    val underlying = q"${c.prefix}.underlying"
+    q"if ($underlying.isWarnEnabled) $underlying.warn($marker, $message, $cause)"
   }
 
   // Info
@@ -96,6 +122,18 @@ private object LoggerMacro {
     }
   }
 
+  def infoMessageMarker(c: LoggerContext)(marker: c.Expr[Marker], message: c.Expr[String]) = {
+    import c.universe._
+    val underlying = q"${c.prefix}.underlying"
+    q"if ($underlying.isInfoEnabled) $underlying.info($marker, $message)"
+  }
+
+  def infoMessageCauseMarker(c: LoggerContext)(marker: c.Expr[Marker], message: c.Expr[String], cause: c.Expr[Throwable]) = {
+    import c.universe._
+    val underlying = q"${c.prefix}.underlying"
+    q"if ($underlying.isInfoEnabled) $underlying.info($marker, $message, $cause)"
+  }
+
   // Debug
 
   def debugMessage(c: LoggerContext)(message: c.Expr[String]) = {
@@ -120,6 +158,18 @@ private object LoggerMacro {
     }
   }
 
+  def debugMessageMarker(c: LoggerContext)(marker: c.Expr[Marker], message: c.Expr[String]) = {
+    import c.universe._
+    val underlying = q"${c.prefix}.underlying"
+    q"if ($underlying.isDebugEnabled) $underlying.debug($marker, $message)"
+  }
+
+  def debugMessageCauseMarker(c: LoggerContext)(marker: c.Expr[Marker], message: c.Expr[String], cause: c.Expr[Throwable]) = {
+    import c.universe._
+    val underlying = q"${c.prefix}.underlying"
+    q"if ($underlying.isDebugEnabled) $underlying.debug($marker, $message, $cause)"
+  }
+
   // Trace
 
   def traceMessage(c: LoggerContext)(message: c.Expr[String]) = {
@@ -142,5 +192,17 @@ private object LoggerMacro {
       case 2 => q"if ($underlying.isTraceEnabled) com.typesafe.scalalogging.slf4j.LoggerSupport.trace($underlying, $message, ${args(0)}, ${args(1)})"
       case _ => q"if ($underlying.isTraceEnabled) $underlying.trace($message, ..$args)"
     }
+  }
+
+  def traceMessageMarker(c: LoggerContext)(marker: c.Expr[Marker], message: c.Expr[String]) = {
+    import c.universe._
+    val underlying = q"${c.prefix}.underlying"
+    q"if ($underlying.isTraceEnabled) $underlying.trace($marker, $message)"
+  }
+
+  def traceMessageCauseMarker(c: LoggerContext)(marker: c.Expr[Marker], message: c.Expr[String], cause: c.Expr[Throwable]) = {
+    import c.universe._
+    val underlying = q"${c.prefix}.underlying"
+    q"if ($underlying.isTraceEnabled) $underlying.trace($marker, $message, $cause)"
   }
 }

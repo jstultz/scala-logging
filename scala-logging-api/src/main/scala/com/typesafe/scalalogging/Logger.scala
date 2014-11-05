@@ -16,6 +16,8 @@
 
 package com.typesafe.scalalogging
 
+import org.slf4j.Marker
+
 /**
  * API for a performant logger based on macros.
  */
@@ -29,6 +31,10 @@ trait Logger {
 
   def error(message: String, args: AnyRef*): Unit
 
+  def error(marker: Marker, message: String): Unit
+
+  def error(marker: Marker, message: String, cause: Throwable): Unit
+
   // Warn
 
   def warn(message: String): Unit
@@ -36,6 +42,10 @@ trait Logger {
   def warn(message: String, cause: Throwable): Unit
 
   def warn(message: String, args: AnyRef*): Unit
+
+  def warn(marker: Marker, message: String): Unit
+
+  def warn(marker: Marker, message: String, cause: Throwable): Unit
 
   // Info
 
@@ -45,6 +55,10 @@ trait Logger {
 
   def info(message: String, args: AnyRef*): Unit
 
+  def info(marker: Marker, message: String): Unit
+
+  def info(marker: Marker, message: String, cause: Throwable): Unit
+
   // Debug
 
   def debug(message: String): Unit
@@ -53,6 +67,10 @@ trait Logger {
 
   def debug(message: String, args: AnyRef*): Unit
 
+  def debug(marker: Marker, message: String): Unit
+
+  def debug(marker: Marker, message: String, cause: Throwable): Unit
+
   // Trace
 
   def trace(message: String): Unit
@@ -60,6 +78,10 @@ trait Logger {
   def trace(message: String, cause: Throwable): Unit
 
   def trace(message: String, args: AnyRef*): Unit
+
+  def trace(marker: Marker, message: String): Unit
+
+  def trace(marker: Marker, message: String, cause: Throwable): Unit
 }
 
 /**
@@ -78,6 +100,12 @@ private[scalalogging] class BaseLogger extends Logger {
   override def error(message: String, args: AnyRef*): Unit =
     ???
 
+  override def error(marker: Marker, message: String): Unit =
+    ???
+
+  override def error(marker: Marker, message: String, cause: Throwable): Unit =
+    ???
+
   // Warn
 
   override def warn(message: String): Unit =
@@ -87,6 +115,12 @@ private[scalalogging] class BaseLogger extends Logger {
     ???
 
   override def warn(message: String, args: AnyRef*): Unit =
+    ???
+
+  override def warn(marker: Marker, message: String): Unit =
+    ???
+
+  override def warn(marker: Marker, message: String, cause: Throwable): Unit =
     ???
 
   // Info
@@ -100,6 +134,12 @@ private[scalalogging] class BaseLogger extends Logger {
   override def info(message: String, args: AnyRef*): Unit =
     ???
 
+  override def info(marker: Marker, message: String): Unit =
+    ???
+
+  override def info(marker: Marker, message: String, cause: Throwable): Unit =
+    ???
+
   // Debug
 
   override def debug(message: String): Unit =
@@ -111,6 +151,12 @@ private[scalalogging] class BaseLogger extends Logger {
   override def debug(message: String, args: AnyRef*): Unit =
     ???
 
+  override def debug(marker: Marker, message: String): Unit =
+    ???
+
+  override def debug(marker: Marker, message: String, cause: Throwable): Unit =
+    ???
+
   // Trace
 
   override def trace(message: String): Unit =
@@ -120,5 +166,11 @@ private[scalalogging] class BaseLogger extends Logger {
     ???
 
   override def trace(message: String, args: AnyRef*): Unit =
+    ???
+
+  override def trace(marker: Marker, message: String): Unit =
+    ???
+
+  override def trace(marker: Marker, message: String, cause: Throwable): Unit =
     ???
 }

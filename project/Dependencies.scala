@@ -21,6 +21,7 @@ object Dependencies {
   import Library._
 
   val scalaLoggingApi = List(
+    slf4jApi
   )
 
   def scalaLoggingSlf4j(scalaVersion: String) = List(
