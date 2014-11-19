@@ -18,6 +18,7 @@ package com.typesafe.scalalogging
 package slf4j
 
 import org.slf4j.{ Logger => Underlying }
+import org.slf4j.Marker
 
 /**
  * Companion for [[Logger]].
@@ -44,6 +45,10 @@ final class Logger private (val underlying: Underlying) extends BaseLogger {
 
   override def error(message: String, args: AnyRef*): Unit = macro LoggerMacro.errorMessageArgs
 
+  override def error(marker: Marker, message: String): Unit = macro LoggerMacro.errorMessageMarker
+
+  override def error(marker: Marker, message: String, cause: Throwable): Unit = macro LoggerMacro.errorMessageCauseMarker
+
   // Warn
 
   override def warn(message: String): Unit = macro LoggerMacro.warnMessage
@@ -51,6 +56,10 @@ final class Logger private (val underlying: Underlying) extends BaseLogger {
   override def warn(message: String, cause: Throwable): Unit = macro LoggerMacro.warnMessageCause
 
   override def warn(message: String, args: AnyRef*): Unit = macro LoggerMacro.warnMessageArgs
+
+  override def warn(marker: Marker, message: String): Unit = macro LoggerMacro.warnMessageMarker
+
+  override def warn(marker: Marker, message: String, cause: Throwable): Unit = macro LoggerMacro.warnMessageCauseMarker
 
   // Info
 
@@ -60,6 +69,10 @@ final class Logger private (val underlying: Underlying) extends BaseLogger {
 
   override def info(message: String, args: AnyRef*): Unit = macro LoggerMacro.infoMessageArgs
 
+  override def info(marker: Marker, message: String): Unit = macro LoggerMacro.infoMessageMarker
+
+  override def info(marker: Marker, message: String, cause: Throwable): Unit = macro LoggerMacro.infoMessageCauseMarker
+
   // Debug
 
   override def debug(message: String): Unit = macro LoggerMacro.debugMessage
@@ -68,6 +81,10 @@ final class Logger private (val underlying: Underlying) extends BaseLogger {
 
   override def debug(message: String, args: AnyRef*): Unit = macro LoggerMacro.debugMessageArgs
 
+  override def debug(marker: Marker, message: String): Unit = macro LoggerMacro.debugMessageMarker
+
+  override def debug(marker: Marker, message: String, cause: Throwable): Unit = macro LoggerMacro.debugMessageCauseMarker
+
   // Trace
 
   override def trace(message: String): Unit = macro LoggerMacro.traceMessage
@@ -75,4 +92,8 @@ final class Logger private (val underlying: Underlying) extends BaseLogger {
   override def trace(message: String, cause: Throwable): Unit = macro LoggerMacro.traceMessageCause
 
   override def trace(message: String, args: AnyRef*): Unit = macro LoggerMacro.traceMessageArgs
+
+  override def trace(marker: Marker, message: String): Unit = macro LoggerMacro.traceMessageMarker
+
+  override def trace(marker: Marker, message: String, cause: Throwable): Unit = macro LoggerMacro.traceMessageCauseMarker
 }

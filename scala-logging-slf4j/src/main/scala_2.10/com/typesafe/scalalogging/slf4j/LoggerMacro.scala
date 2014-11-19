@@ -55,6 +55,18 @@ private object LoggerMacro {
         c.prefix.splice.underlying.error(message.splice, cause.splice)
     )
 
+  def errorMessageMarker(c: LoggerContext)(marker: c.Expr[Marker], message: c.Expr[String]) =
+    c.universe.reify(
+      if (c.prefix.splice.underlying.isErrorEnabled)
+        c.prefix.splice.underlying.error(marker.splice, message.splice)
+    )
+
+  def errorMessageCauseMarker(c: LoggerContext)(marker: c.Expr[Marker], message: c.Expr[String], cause: c.Expr[Throwable]) =
+    c.universe.reify(
+      if (c.prefix.splice.underlying.isErrorEnabled)
+        c.prefix.splice.underlying.error(marker.splice, message.splice, cause.splice)
+    )
+
   // Warn
 
   def warnMessage(c: LoggerContext)(message: c.Expr[String]) =
@@ -83,6 +95,18 @@ private object LoggerMacro {
     c.universe.reify(
       if (c.prefix.splice.underlying.isWarnEnabled)
         c.prefix.splice.underlying.warn(message.splice, cause.splice)
+    )
+
+  def warnMessageMarker(c: LoggerContext)(marker: c.Expr[Marker], message: c.Expr[String]) =
+    c.universe.reify(
+      if (c.prefix.splice.underlying.isWarnEnabled)
+        c.prefix.splice.underlying.warn(marker.splice, message.splice)
+    )
+
+  def warnMessageCauseMarker(c: LoggerContext)(marker: c.Expr[Marker], message: c.Expr[String], cause: c.Expr[Throwable]) =
+    c.universe.reify(
+      if (c.prefix.splice.underlying.isWarnEnabled)
+        c.prefix.splice.underlying.warn(marker.splice, message.splice, cause.splice)
     )
 
   // Info
@@ -115,6 +139,18 @@ private object LoggerMacro {
         c.prefix.splice.underlying.info(message.splice, cause.splice)
     )
 
+  def infoMessageMarker(c: LoggerContext)(marker: c.Expr[Marker], message: c.Expr[String]) =
+    c.universe.reify(
+      if (c.prefix.splice.underlying.isInfoEnabled)
+        c.prefix.splice.underlying.info(marker.splice, message.splice)
+    )
+
+  def infoMessageCauseMarker(c: LoggerContext)(marker: c.Expr[Marker], message: c.Expr[String], cause: c.Expr[Throwable]) =
+    c.universe.reify(
+      if (c.prefix.splice.underlying.isInfoEnabled)
+        c.prefix.splice.underlying.info(marker.splice, message.splice, cause.splice)
+    )
+
   // Debug
 
   def debugMessage(c: LoggerContext)(message: c.Expr[String]) =
@@ -145,6 +181,18 @@ private object LoggerMacro {
         c.prefix.splice.underlying.debug(message.splice, cause.splice)
     )
 
+  def debugMessageMarker(c: LoggerContext)(marker: c.Expr[Marker], message: c.Expr[String]) =
+    c.universe.reify(
+      if (c.prefix.splice.underlying.isDebugEnabled)
+        c.prefix.splice.underlying.debug(marker.splice, message.splice)
+    )
+
+  def debugMessageCauseMarker(c: LoggerContext)(marker: c.Expr[Marker], message: c.Expr[String], cause: c.Expr[Throwable]) =
+    c.universe.reify(
+      if (c.prefix.splice.underlying.isDebugEnabled)
+        c.prefix.splice.underlying.debug(marker.splice, message.splice, cause.splice)
+    )
+
   // Trace
 
   def traceMessage(c: LoggerContext)(message: c.Expr[String]) =
@@ -173,6 +221,18 @@ private object LoggerMacro {
     c.universe.reify(
       if (c.prefix.splice.underlying.isTraceEnabled)
         c.prefix.splice.underlying.trace(message.splice, cause.splice)
+    )
+
+  def traceMessageMarker(c: LoggerContext)(marker: c.Expr[Marker], message: c.Expr[String]) =
+    c.universe.reify(
+      if (c.prefix.splice.underlying.isTraceEnabled)
+        c.prefix.splice.underlying.trace(marker.splice, message.splice)
+    )
+
+  def traceMessageCauseMarker(c: LoggerContext)(marker: c.Expr[Marker], message: c.Expr[String], cause: c.Expr[Throwable]) =
+    c.universe.reify(
+      if (c.prefix.splice.underlying.isTraceEnabled)
+        c.prefix.splice.underlying.trace(marker.splice, message.splice, cause.splice)
     )
 
   // Common
